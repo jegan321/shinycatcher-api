@@ -11,6 +11,6 @@ import com.shinycatcher.api.entity.User;
 public interface UserRepository extends CrudRepository<User, Long> {
 	
 	@Query("select * from user where upper(user_name) = upper(:userName)")
-	Optional<User> findByUserName(@Param("userName") String userName);
+	Iterable<User> findByUserName(@Param("userName") String userName);
 
 }
