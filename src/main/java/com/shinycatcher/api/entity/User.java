@@ -11,9 +11,7 @@ public class User {
 	public String userName;
 	public String userEmail;
 	
-	public User() {
-		
-	}
+	public User() {}
 	
 	public User(UserDto dto) {
 		this.id = dto.id;
