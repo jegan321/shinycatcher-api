@@ -1,6 +1,7 @@
 package com.shinycatcher.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shinycatcher.api.dto.UserDto;
+import com.shinycatcher.api.dto.UsersDto;
 import com.shinycatcher.api.service.UserService;
 
 @RestController
@@ -18,7 +20,7 @@ public class UsersController {
 	UserService userService;
 	
 	@RequestMapping(value="/users", method=RequestMethod.GET)
-	public Iterable<UserDto> getUsers(@RequestParam String userName) {
+	public UsersDto getUsers(@RequestParam(required=false) String userName) {
 		return userService.getUsers(userName);
 	}
 	

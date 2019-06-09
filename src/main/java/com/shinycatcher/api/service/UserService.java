@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shinycatcher.api.dto.UserDto;
+import com.shinycatcher.api.dto.UsersDto;
 import com.shinycatcher.api.entity.User;
 import com.shinycatcher.api.exception.ResourceNotFoundException;
 import com.shinycatcher.api.repository.UserRepository;
@@ -19,8 +20,8 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	public Iterable<UserDto> getUsers(String userName) {
-		List<UserDto> userDtos = new ArrayList<>();
+	public UsersDto getUsers(String userName) {
+		UsersDto usersDto = new UsersDto();
 		Iterable<User> users;
 		if (StringUtils.isNotBlank(userName)) {
 			users = userRepository.findByUserName(userName);
@@ -28,9 +29,9 @@ public class UserService {
 			users = userRepository.findAll();
 		}
 		for (User user : users) {
-			userDtos.add(user.toDto());
+			usersDto.users.add(user.toDto());
 		}
-		return userDtos;
+		return usersDto;
 	}
 	
 	public UserDto getUser(Long id) {
