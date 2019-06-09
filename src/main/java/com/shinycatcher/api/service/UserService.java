@@ -1,11 +1,14 @@
 package com.shinycatcher.api.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shinycatcher.api.dto.UserDto;
 import com.shinycatcher.api.entity.User;
 import com.shinycatcher.api.exception.ResourceNotFoundException;
 import com.shinycatcher.api.repository.UserRepository;
@@ -16,29 +19,35 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	public Iterable<User> getUsers(String userName) {
+	public Iterable<UserDto> getUsers(String userName) {
+		List<UserDto> userDtos = new ArrayList<>();
+		Iterable<User> users;
 		if (StringUtils.isNotBlank(userName)) {
-			return userRepository.findByUserName(userName);
+			users = userRepository.findByUserName(userName);
 		} else {
-			return userRepository.findAll();
+			users = userRepository.findAll();
 		}
+		for (User user : users) {
+			userDtos.add(user.toDto());
+		}
+		return userDtos;
 	}
 	
-	public User getUser(Long id) {
+	public UserDto getUser(Long id) {
 		Optional<User> user = userRepository.findById(id);
-		return user.orElseThrow(ResourceNotFoundException :: new);
+		return user.orElseThrow(ResourceNotFoundException::new).toDto();
 	}
 	
-	public void postUser(User user) {
-		userRepository.save(user);
+	public void postUser(UserDto userDto) {
+		userRepository.save(new User(userDto));
 	}
 	
-	public void putUser(User user) {
-		userRepository.save(user);
+	public void putUser(UserDto userDto) {
+		userRepository.save(new User(userDto));
 	}
 	
-	public void deleteUser(User user) {
-		userRepository.delete(user);
+	public void deleteUser(UserDto userDto) {
+		userRepository.delete(new User(userDto));
 	}
 
 }

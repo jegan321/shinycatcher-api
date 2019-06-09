@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shinycatcher.api.entity.User;
+import com.shinycatcher.api.dto.UserDto;
 import com.shinycatcher.api.service.UserService;
 
 @RestController
@@ -18,27 +18,27 @@ public class UsersController {
 	UserService userService;
 	
 	@RequestMapping(value="/users", method=RequestMethod.GET)
-	public Iterable<User> getUsers(@RequestParam String userName) {
+	public Iterable<UserDto> getUsers(@RequestParam String userName) {
 		return userService.getUsers(userName);
 	}
 	
 	@RequestMapping(value="/users/{id}", method=RequestMethod.GET)
-	public User getUser(@PathVariable Long id) {
+	public UserDto getUser(@PathVariable Long id) {
 		return userService.getUser(id);
 	}
 	
 	@RequestMapping(value="/users", method=RequestMethod.POST)
-	public void postUser(@RequestBody User user) {
+	public void postUser(@RequestBody UserDto user) {
 		userService.postUser(user);
 	}
 	
 	@RequestMapping(value="/users/{id}", method=RequestMethod.PUT)
-	public void putUser(@RequestBody User user) {
+	public void putUser(@RequestBody UserDto user) {
 		userService.putUser(user);
 	}
 	
 	@RequestMapping(value="/users/{id}", method=RequestMethod.DELETE)
-	public void deleteUser(@RequestBody User user) {
+	public void deleteUser(@RequestBody UserDto user) {
 		userService.deleteUser(user);
 	}
 
