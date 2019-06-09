@@ -34,8 +34,7 @@ public class UserService {
 	}
 	
 	public UserDto getUser(Long id) {
-		Optional<User> user = userRepository.findById(id);
-		return user.orElseThrow(ResourceNotFoundException::new).toDto();
+		return userRepository.findById(id).orElseThrow(ResourceNotFoundException::new).toDto();
 	}
 	
 	public void postUser(UserDto userDto) {
