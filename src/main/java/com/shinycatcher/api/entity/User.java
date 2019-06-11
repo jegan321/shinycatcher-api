@@ -7,21 +7,21 @@ import com.shinycatcher.api.dto.UserDto;
 public class User {
 	
 	@Id
-	public Long id;
+	public Long userId;
 	public String userName;
 	public String userEmail;
 	
 	public User() {}
 	
 	public User(UserDto dto) {
-		this.id = dto.id;
+		this.userId = dto.userId;
 		this.userName = dto.userName;
 		this.userEmail = dto.userEmail;
 	}
 	
 	public UserDto toDto() {
 		UserDto dto = new UserDto();
-		dto.id = id;
+		dto.userId = userId;
 		dto.userName = userName;
 		dto.userEmail = userEmail;
 		return dto;

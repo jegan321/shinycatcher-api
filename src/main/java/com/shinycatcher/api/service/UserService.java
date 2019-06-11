@@ -45,8 +45,10 @@ public class UserService {
 		userRepository.save(new User(userDto));
 	}
 	
-	public void deleteUser(UserDto userDto) {
-		userRepository.delete(new User(userDto));
+	public void deleteUser(Long id) {
+		User user = new User();
+		user.userId = id;
+		userRepository.delete(user);
 	}
 
 }

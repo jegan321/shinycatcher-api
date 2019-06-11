@@ -1,6 +1,7 @@
 package com.shinycatcher.api.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertThat;
 
 import org.json.JSONException;
 import org.junit.Test;
@@ -28,31 +29,61 @@ public class UsersIntegrationTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
-
+    
 	@Test
 	public void test() throws JSONException {
-		String url = "http://localhost:" + port;
 		
 		// Create user
-		UserDto user = new UserDto(null, "jegan", "john@gmail.com");
-		restTemplate.exchange(url + "/users", HttpMethod.POST, new HttpEntity<UserDto>(user), String.class);
+		postUser(new UserDto(null, "jegan", "john@gmail.com"));
 		
 		// Get user
-		UserDto[] response = restTemplate.getForObject("http://localhost:" + port + "/users?userName=jegan", UserDto[].class);
-		assertThat(response.length).isEqualTo(1);
-		assertThat(response[0].userName).isEqualTo("jegan");
-		assertThat(response[0].userEmail).isEqualTo("john@gmail.com");
-		assertThat(response[0].id).isNotNull();
-		Long userId = response[0].id;
+		UserDto user = getUserByUserName("jegan");
+		
+		// Test create worked
+		assertThat(user.userName).isEqualTo("jegan");
+		assertThat(user.userEmail).isEqualTo("john@gmail.com");
+		assertThat(user.userId).isNotNull();
 
 		// Update user
-		UserDto updatedUser = new UserDto(userId, "jegan2", "john2@gmail.com");
-		restTemplate.exchange(url + "/users/"+userId, HttpMethod.PUT, new HttpEntity<UserDto>(updatedUser), String.class);
-		response = restTemplate.getForObject("http://localhost:" + port + "/users?userName=jegan2", UserDto[].class);
+		putUser(new UserDto(user.userId, "jegan2", "john2@gmail.com"));
+		
+		// Test update worked
+		user = getUserByUserName("jegan2");
+		assertThat(user.userName).isEqualTo("jegan2");
+		assertThat(user.userEmail).isEqualTo("john2@gmail.com");
+		assertThat(user.userId).isNotNull();
+		assertUserDoesntExist("jegan");
+		
+		// Delete user
+		deleteUser(user.userId);
+		
+		// Test delete worked
+		assertUserDoesntExist("jegan");
+		assertUserDoesntExist("jegan2");
+		
+	}
+	
+	private void postUser(UserDto user) {
+		restTemplate.exchange("http://localhost:"+port+"/users", HttpMethod.POST, new HttpEntity<UserDto>(user), String.class);
+	}
+	
+	private UserDto getUserByUserName(String userName) {
+		UserDto[] response = restTemplate.getForObject("http://localhost:" + port + "/users?userName="+userName, UserDto[].class);
 		assertThat(response.length).isEqualTo(1);
-		assertThat(response[0].userName).isEqualTo("jegan2");
-		assertThat(response[0].userEmail).isEqualTo("john2@gmail.com");
-		assertThat(response[0].id).isNotNull();
+		return response[0];
+	}
+	
+	private void assertUserDoesntExist(String userName) {
+		UserDto[] response = restTemplate.getForObject("http://localhost:" + port + "/users?userName="+userName, UserDto[].class);
+		assertThat(response.length).isEqualTo(0);
+	}
+	
+	private void putUser(UserDto user) {
+		restTemplate.exchange("http://localhost:"+port+"/users/"+user.userId, HttpMethod.PUT, new HttpEntity<UserDto>(user), String.class);
+	}
+	
+	private void deleteUser(Long userId) {
+		restTemplate.delete("http://localhost:"+port+"/users/"+userId);
 	}
 
 }
