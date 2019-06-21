@@ -10,6 +10,7 @@ public class User {
 	public Long userId;
 	public String userName;
 	public String userEmail;
+	public String userStatus;
 	
 	public User() {}
 	
@@ -17,6 +18,7 @@ public class User {
 		this.userId = dto.userId;
 		this.userName = dto.userName;
 		this.userEmail = dto.userEmail;
+		this.userStatus = dto.userStatus;
 	}
 	
 	public UserDto toDto() {
@@ -24,6 +26,7 @@ public class User {
 		dto.userId = userId;
 		dto.userName = userName;
 		dto.userEmail = userEmail;
+		dto.userStatus = userStatus;
 		return dto;
 	}
 

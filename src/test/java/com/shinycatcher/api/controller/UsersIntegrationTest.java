@@ -34,7 +34,7 @@ public class UsersIntegrationTest {
 	public void test() throws JSONException {
 		
 		// Create user
-		postUser(new UserDto(null, "jegan", "john@gmail.com"));
+		postUser(new UserDto(null, "jegan", "john@gmail.com", "Basic"));
 		
 		// Get user
 		UserDto user = getUserByUserName("jegan");
@@ -45,7 +45,7 @@ public class UsersIntegrationTest {
 		assertThat(user.userId).isNotNull();
 
 		// Update user
-		putUser(new UserDto(user.userId, "jegan2", "john2@gmail.com"));
+		putUser(new UserDto(user.userId, "jegan2", "john2@gmail.com", "Basic"));
 		
 		// Test update worked
 		user = getUserByUserName("jegan2");
