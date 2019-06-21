@@ -65,3 +65,8 @@ CREATE TABLE entry (
     FOREIGN KEY (ball_id) REFERENCES ball(ball_id),
     FOREIGN KEY (capture_method_id) REFERENCES capture_method(capture_method_id)
 );
+
+
+INSERT INTO entry(user_id) VALUES (1);
+INSERT INTO entry(user_id) VALUES (1);
+INSERT INTO entry(user_id) VALUES (1);

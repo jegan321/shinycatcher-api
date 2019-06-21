@@ -3,13 +3,10 @@ package com.shinycatcher.api.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-
 import com.shinycatcher.api.dto.UserDto;
 
 public class User {
 	
-	@Id
 	public Long userId;
 	public String userName;
 	public String userEmail;
@@ -36,5 +33,6 @@ public class User {
 		}
 		return dto;
 	}
+	
 
 }
