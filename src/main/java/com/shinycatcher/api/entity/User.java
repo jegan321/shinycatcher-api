@@ -1,5 +1,8 @@
 package com.shinycatcher.api.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 
 import com.shinycatcher.api.dto.UserDto;
@@ -11,6 +14,7 @@ public class User {
 	public String userName;
 	public String userEmail;
 	public String userStatus;
+	public List<Entry> entries = new ArrayList<>();
 	
 	public User() {}
 	
@@ -27,6 +31,9 @@ public class User {
 		dto.userName = userName;
 		dto.userEmail = userEmail;
 		dto.userStatus = userStatus;
+		for (Entry entry : entries) {
+			dto.entries.add(entry.toDto());
+		}
 		return dto;
 	}
 

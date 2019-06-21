@@ -1,11 +1,15 @@
 package com.shinycatcher.api.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserDto {
 
 	public Long userId;
 	public String userName;
 	public String userEmail;
 	public String userStatus;
+	public List<EntryDto> entries = new ArrayList<>();
 	
 	public UserDto() {}
 	
