@@ -17,17 +17,26 @@ CREATE TABLE ball (
     PRIMARY KEY(ball_id)
 );
 
+INSERT INTO ball(ball_name, ball_image) VALUES ('Pokeball', 'pokeball.png');
+INSERT INTO ball(ball_name, ball_image) VALUES ('Master Ball', 'master_ball.png');
+
 CREATE TABLE capture_method (
     capture_method_id INT NOT NULL AUTO_INCREMENT,
     capture_method_name VARCHAR NOT NULL,
     PRIMARY KEY(capture_method_id)
 );
 
+INSERT INTO capture_method(capture_method_name) VALUES ('Soft Resets');
+
 CREATE TABLE pokemon_species (
     pokemon_species_id INT NOT NULL AUTO_INCREMENT,
     pokemon_species_name VARCHAR NOT NULL,
     PRIMARY KEY(pokemon_species_id)
 );
+
+INSERT INTO pokemon_species(pokemon_species_name) VALUES ('Bulbasaur');
+INSERT INTO pokemon_species(pokemon_species_name) VALUES ('Squirtle');
+INSERT INTO pokemon_species(pokemon_species_name) VALUES ('Charmander');
 
 CREATE TABLE pokemon (
     pokemon_id INT NOT NULL AUTO_INCREMENT,
@@ -38,35 +47,45 @@ CREATE TABLE pokemon (
     FOREIGN KEY (pokemon_species_id) REFERENCES pokemon_species(pokemon_species_id)
 );
 
+INSERT INTO pokemon(pokemon_name, pokemon_image, pokemon_species_id) VALUES ('Bulbasaur', 'bulbasaur.png', 1);
+INSERT INTO pokemon(pokemon_name, pokemon_image, pokemon_species_id) VALUES ('Squirtle', 'squirtle.png', 2);
+INSERT INTO pokemon(pokemon_name, pokemon_image, pokemon_species_id) VALUES ('Charmander', 'charmander.png', 3);
+
 CREATE TABLE pokedex (
     pokedex_id INT NOT NULL AUTO_INCREMENT,
     pokedex_name VARCHAR NOT NULL,
     PRIMARY KEY(pokedex_id)
 );
 
+INSERT INTO pokedex(pokedex_name) VALUES ('National Dex');
+
 CREATE TABLE pokemon_pokedex (
     pokemon_pokedex_id INT NOT NULL AUTO_INCREMENT,
     pokemon_id INT,
     pokedex_id INT,
-    PRIMARY KEY(pokedex_id),
+    PRIMARY KEY(pokemon_pokedex_id),
     FOREIGN KEY (pokemon_id) REFERENCES pokemon(pokemon_id),
     FOREIGN KEY (pokedex_id) REFERENCES pokedex(pokedex_id)
 );
 
+INSERT INTO pokemon_pokedex(pokemon_id, pokedex_id) VALUES (1, 1);
+INSERT INTO pokemon_pokedex(pokemon_id, pokedex_id) VALUES (2, 1);
+INSERT INTO pokemon_pokedex(pokemon_id, pokedex_id) VALUES (3, 1);
+
 CREATE TABLE entry (
     entry_id INT NOT NULL AUTO_INCREMENT,
-    pokemon_pokedex_id INT,
     user_id INT,
+    pokemon_pokedex_id INT,
     ball_id INT,
     capture_method_id INT,
     PRIMARY KEY(entry_id),
-    FOREIGN KEY (pokemon_pokedex_id) REFERENCES pokemon_pokedex(pokemon_pokedex_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (pokemon_pokedex_id) REFERENCES pokemon_pokedex(pokemon_pokedex_id),
     FOREIGN KEY (ball_id) REFERENCES ball(ball_id),
     FOREIGN KEY (capture_method_id) REFERENCES capture_method(capture_method_id)
 );
 
+INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (1, 1, 1, 1);
+INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (2, 1, 1, 1);
+INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (3, 1, 1, 1);
 
-INSERT INTO entry(user_id) VALUES (1);
-INSERT INTO entry(user_id) VALUES (1);
-INSERT INTO entry(user_id) VALUES (1);
