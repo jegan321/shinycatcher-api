@@ -18,6 +18,7 @@ CREATE TABLE ball (
 );
 
 INSERT INTO ball(ball_name, ball_image) VALUES ('Pokeball', 'pokeball.png');
+INSERT INTO ball(ball_name, ball_image) VALUES ('Great Ball', 'great_ball.png');
 INSERT INTO ball(ball_name, ball_image) VALUES ('Master Ball', 'master_ball.png');
 
 CREATE TABLE capture_method (
@@ -86,6 +87,8 @@ CREATE TABLE entry (
 );
 
 INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (1, 1, 1, 1);
+INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (1, 2, 2, 1);
+INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (1, 3, 3, 1);
+
 INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (2, 1, 1, 1);
-INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (3, 1, 1, 1);
 

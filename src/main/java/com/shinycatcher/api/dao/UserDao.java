@@ -17,7 +17,13 @@ public class UserDao {
 	JdbcTemplate jdbcTemplate;
 	
 	public List<User> findAll() {
-		String sql = "SELECT * FROM user LEFT JOIN entry ON user.user_id=entry.user_id";
+		String sql = "SELECT * FROM user "
+				+ "LEFT JOIN entry ON entry.user_id=user.user_id "
+				+ "LEFT JOIN pokemon_pokedex ON pokemon_pokedex.pokemon_pokedex_id=entry.pokemon_pokedex_id "
+				+ "LEFT JOIN pokemon ON pokemon.pokemon_id=pokemon_pokedex.pokemon_id "
+				+ "LEFT JOIN pokedex ON pokedex.pokedex_id=pokemon_pokedex.pokedex_id "
+				+ "LEFT JOIN capture_method ON capture_method.capture_method_id=entry.capture_method_id "
+				+ "LEFT JOIN ball ON ball.ball_id=entry.ball_id ";
 		return jdbcTemplate.query(sql, new UserAggregateExtractor());
 	}
 	
