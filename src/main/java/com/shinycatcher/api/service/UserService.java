@@ -3,7 +3,6 @@ package com.shinycatcher.api.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -19,23 +18,18 @@ public class UserService {
 	@Autowired
 	UserDao userDao;
 	
-	public List<UserDto> getUsers(String userName) {
+	public List<UserDto> getUsers() {
 		List<UserDto> userDtos = new ArrayList<>();
-		Iterable<User> users;
-		if (StringUtils.isNotBlank(userName)) {
-			users = userDao.findByUserName(userName);
-		} else {
-			users = userDao.findAll();
-		}
+		Iterable<User> users = userDao.findAll();
 		for (User user : users) {
 			userDtos.add(user.toDto());
 		}
 		return userDtos;
 	}
 	
-	public UserDto getUser(Long id) {
+	public UserDto getUser(String userName) {
 		try {
-			return userDao.findById(id).toDto();
+			return userDao.findByUserName(userName).toDto();
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException();
 		}

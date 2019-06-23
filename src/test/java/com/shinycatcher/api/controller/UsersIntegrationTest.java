@@ -1,6 +1,8 @@
 package com.shinycatcher.api.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import org.json.JSONException;
 import org.junit.Test;
@@ -36,7 +38,7 @@ public class UsersIntegrationTest {
 		postUser(new UserDto(null, "jegan", "john@gmail.com", "Basic"));
 		
 		// Get user
-		UserDto user = getUserByUserName("jegan");
+		UserDto user = getUser("jegan");
 		
 		// Test create worked
 		assertThat(user.userName).isEqualTo("jegan");
@@ -47,7 +49,7 @@ public class UsersIntegrationTest {
 		putUser(new UserDto(user.userId, "jegan2", "john2@gmail.com", "Basic"));
 		
 		// Test update worked
-		user = getUserByUserName("jegan2");
+		user = getUser("jegan2");
 		assertThat(user.userName).isEqualTo("jegan2");
 		assertThat(user.userEmail).isEqualTo("john2@gmail.com");
 		assertThat(user.userId).isNotNull();
@@ -59,22 +61,19 @@ public class UsersIntegrationTest {
 		// Test delete worked
 		assertUserDoesntExist("jegan");
 		assertUserDoesntExist("jegan2");
-		
 	}
 	
 	private void postUser(UserDto user) {
 		restTemplate.exchange("http://localhost:"+port+"/users", HttpMethod.POST, new HttpEntity<UserDto>(user), String.class);
 	}
 	
-	private UserDto getUserByUserName(String userName) {
-		UserDto[] response = restTemplate.getForObject("http://localhost:" + port + "/users?userName="+userName, UserDto[].class);
-		assertThat(response.length).isEqualTo(1);
-		return response[0];
+	private UserDto getUser(String userName) {
+		return restTemplate.getForObject("http://localhost:" + port + "/users/"+userName, UserDto.class);
 	}
 	
 	private void assertUserDoesntExist(String userName) {
-		UserDto[] response = restTemplate.getForObject("http://localhost:" + port + "/users?userName="+userName, UserDto[].class);
-		assertThat(response.length).isEqualTo(0);
+		UserDto dto = restTemplate.getForObject("http://localhost:" + port + "/users/"+userName, UserDto.class);
+		assertNull(dto.userName);
 	}
 	
 	private void putUser(UserDto user) {
