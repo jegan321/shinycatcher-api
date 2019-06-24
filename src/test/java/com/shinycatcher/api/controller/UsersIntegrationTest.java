@@ -2,7 +2,6 @@ package com.shinycatcher.api.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
 
 import org.json.JSONException;
 import org.junit.Test;
