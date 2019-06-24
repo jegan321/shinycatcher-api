@@ -94,6 +94,7 @@ INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUE
 
 CREATE TABLE encounter (
     encounter_id INT NOT NULL AUTO_INCREMENT,
+    encounter_count INT,
     user_id INT,
     pokemon_id INT,
     PRIMARY KEY(encounter_id),
