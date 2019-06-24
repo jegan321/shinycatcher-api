@@ -92,3 +92,12 @@ INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUE
 
 INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (2, 1, 1, 1);
 
+CREATE TABLE encounter (
+    encounter_id INT NOT NULL AUTO_INCREMENT,
+    user_id INT,
+    pokemon_id INT,
+    PRIMARY KEY(encounter_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (pokemon_id) REFERENCES pokemon(pokemon_id)
+);
+
