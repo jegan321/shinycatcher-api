@@ -18,8 +18,7 @@ public class SuggestionsController {
 	
 	@RequestMapping(value="/suggestions/entry-details", method=RequestMethod.GET)
 	public EntryDetailsDto getEntryDetails() {
-		//TODO: return an object with an array for each of the entry options
-		return new EntryDetailsDto();
+		return suggestionsService.getEntryDetails();
 	}
 	
 	@RequestMapping(value="/suggestions/users", method=RequestMethod.GET)
