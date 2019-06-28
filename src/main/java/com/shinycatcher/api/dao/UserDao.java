@@ -1,10 +1,13 @@
 package com.shinycatcher.api.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.shinycatcher.api.dao.extractor.UserAggregateExtractor;
@@ -48,6 +51,16 @@ public class UserDao {
 	public void delete(User user) {
 		String sql = "DELETE user WHERE user_id=?";
 		jdbcTemplate.update(sql, user.userId);
+	}
+	
+	public List<String> findUserNames() {
+		String sql = "SELECT user_name FROM user";
+		return jdbcTemplate.query(sql, new RowMapper<String>() {
+			@Override
+			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getString("user_name");
+			}
+		});
 	}
 
 }
