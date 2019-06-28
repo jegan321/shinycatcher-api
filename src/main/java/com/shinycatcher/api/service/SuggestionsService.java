@@ -15,6 +15,7 @@ public class SuggestionsService {
 	UserDao userDao;
 	
 	public EntryDetailsDto getEntryDetails() {
+		//TODO: change to use dao classes to get the data from the database
 		return new EntryDetailsDto();
 	}
 	
