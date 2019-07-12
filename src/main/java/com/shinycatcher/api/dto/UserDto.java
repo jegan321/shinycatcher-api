@@ -14,11 +14,12 @@ public class UserDto {
 	
 	public UserDto() {}
 	
-	public UserDto(Long userId, String userName, String userEmail, String userStatus) {
+	public UserDto(Long userId, String userName, String userEmail, String userStatus, String userPassword) {
 		this.userId = userId;
 		this.userName = userName;
 		this.userEmail = userEmail;
 		this.userStatus = userStatus;
+		this.userPassword = userPassword;
 	}
 	
 }

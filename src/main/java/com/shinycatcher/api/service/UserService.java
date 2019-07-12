@@ -40,11 +40,11 @@ public class UserService {
 	
 	public void postUser(UserDto userDto) {
 		User user = new User(userDto);
-//		EncodingResult result = PasswordEncoder.encode(userDto.userPassword);
-//		String base64Password = Base64Encoder.encode(result.password);
-//		String base64Salt = Base64Encoder.encode(result.salt);
-//		user.userPassword = base64Password;
-//		user.salt = base64Salt;
+		EncodingResult result = PasswordEncoder.encode(userDto.userPassword);
+		String base64Password = Base64Encoder.encode(result.password);
+		String base64Salt = Base64Encoder.encode(result.salt);
+		user.userPassword = base64Password;
+		user.salt = base64Salt;
 		userDao.insert(user);
 	}
 	

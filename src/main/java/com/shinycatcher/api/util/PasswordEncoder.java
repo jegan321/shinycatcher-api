@@ -10,6 +10,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * 
  * https://www.owasp.org/index.php/Hashing_Java
@@ -21,6 +23,9 @@ public class PasswordEncoder {
 	private PasswordEncoder() {}
 
 	public static EncodingResult encode(String rawPassword) {
+		if (StringUtils.isBlank(rawPassword)) {
+			throw new RuntimeException("Password cannot be blank");
+		}
 		byte[] salt = generateSalt();
 		byte[] password = hashPassword(rawPassword, salt);
 		return new EncodingResult(password, salt);
