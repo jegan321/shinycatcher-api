@@ -79,11 +79,13 @@ public class UsersIntegrationTest {
 	}
 	
 	private void putUser(UserDto user) {
-		restTemplate.exchange("http://localhost:"+port+"/users/"+user.userId, HttpMethod.PUT, new HttpEntity<UserDto>(user), String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:"+port+"/users/"+user.userId, HttpMethod.PUT, new HttpEntity<UserDto>(user), String.class);
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 	
 	private void deleteUser(Long userId) {
-		restTemplate.delete("http://localhost:"+port+"/users/"+userId);
+		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:"+port+"/users/"+userId, HttpMethod.DELETE, null, String.class);
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 
 }
