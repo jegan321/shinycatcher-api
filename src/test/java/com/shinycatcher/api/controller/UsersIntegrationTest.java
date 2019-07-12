@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.shinycatcher.api.dto.SessionDto;
+import com.shinycatcher.api.dto.UserCredentialsDto;
 import com.shinycatcher.api.dto.UserDto;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -33,7 +35,7 @@ public class UsersIntegrationTest {
     private TestRestTemplate restTemplate;
     
 	@Test
-	public void test() throws JSONException {
+	public void testUserCrudOperations() throws JSONException {
 		
 		// Create user
 		postUser(new UserDto(null, "jegan", "john@gmail.com", "Basic", "password"));
@@ -64,8 +66,20 @@ public class UsersIntegrationTest {
 		assertUserDoesntExist("jegan2");
 	}
 	
+	//TODO: finish
+	@Test
+	public void testAuthentication() {
+		
+		// Create user
+		postUser(new UserDto(null, "auth_user", "auth_user@gmail.com", "Basic", "password"));
+		
+		postSession("auth_user", "password");
+		
+	}
+	
 	private void postUser(UserDto user) {
-		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:"+port+"/users", HttpMethod.POST, new HttpEntity<UserDto>(user), String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:"+port+"/users", 
+				HttpMethod.POST, new HttpEntity<UserDto>(user), String.class);
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 	
@@ -79,13 +93,21 @@ public class UsersIntegrationTest {
 	}
 	
 	private void putUser(UserDto user) {
-		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:"+port+"/users/"+user.userId, HttpMethod.PUT, new HttpEntity<UserDto>(user), String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:"+port+"/users/"+user.userId, 
+				HttpMethod.PUT, new HttpEntity<UserDto>(user), String.class);
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 	
 	private void deleteUser(Long userId) {
-		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:"+port+"/users/"+userId, HttpMethod.DELETE, null, String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:"+port+"/users/"+userId, 
+				HttpMethod.DELETE, null, String.class);
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+	}
+	
+	private SessionDto postSession(String userName, String userPassword) {
+		UserCredentialsDto userCredentials = new UserCredentialsDto(userName, userPassword);
+		return restTemplate.exchange("http://localhost:"+port+"/session", 
+				HttpMethod.POST, new HttpEntity<UserCredentialsDto>(userCredentials), SessionDto.class).getBody();
 	}
 
 }
