@@ -1,7 +1,8 @@
 package com.shinycatcher.api.service;
 
-import java.util.Base64;
+import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import com.shinycatcher.api.exception.ResourceForbiddenException;
 import com.shinycatcher.api.exception.ResourceNotFoundException;
 import com.shinycatcher.api.util.Base64Encoder;
 import com.shinycatcher.api.util.PasswordEncoder;
+import com.shinycatcher.api.util.TokenGenerator;
 
 @Service
 public class SessionService {
@@ -24,7 +26,10 @@ public class SessionService {
 	public SessionDto createSession(UserCredentialsDto userCredentials) {
 		User storedUser = findStoredUser(userCredentials.userName);
 		if (credentialsAreValid(userCredentials, storedUser)) {
-			return new SessionDto("abc123", 12345L);
+			String token = TokenGenerator.generateRandomToken();
+			userDao.updateSessionToken(token, userCredentials.userName);
+			Long expiration = new DateTime().plusSeconds(5).getMillis();
+			return new SessionDto(token, expiration);
 		} else {
 			throw new ResourceForbiddenException("Invalid user credentials");
 		}
@@ -45,5 +50,5 @@ public class SessionService {
 		byte[] storedSalt = Base64Encoder.decodeAsBytes(storedSaltBase64);
 		return PasswordEncoder.compare(userCredentials.userPassword, storedSalt, storedPassword);
 	}
-
+	
 }

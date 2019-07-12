@@ -60,7 +60,7 @@ public class UserService {
 		userDao.delete(user);
 	}
 	
-	public void putUserPassword(char[] newPassword, String userName) {
+	public void putUserPassword(String newPassword, String userName) {
 		userDao.updatePassword(newPassword, userName);
 	}
 	

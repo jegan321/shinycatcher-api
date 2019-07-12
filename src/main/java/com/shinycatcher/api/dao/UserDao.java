@@ -48,9 +48,14 @@ public class UserDao {
 		jdbcTemplate.update(sql, user.userName, user.userEmail, user.userStatus, user.userId);
 	}
 	
-	public void updatePassword(char[] userPassword, String userName) {
+	public void updatePassword(String userPassword, String userName) {
 		String sql = "UPDATE user SET user_password=? WHERE user_name=?";
 		jdbcTemplate.update(sql, userPassword, userName);
+	}
+	
+	public void updateSessionToken(String sessionToken, String userName) {
+		String sql = "UPDATE user SET session_token=? WHERE user_name=?";
+		jdbcTemplate.update(sql, sessionToken, userName);
 	}
 	
 	public void delete(User user) {
