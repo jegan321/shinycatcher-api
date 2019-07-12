@@ -13,6 +13,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.shinycatcher.api.dto.UserDto;
@@ -63,7 +65,8 @@ public class UsersIntegrationTest {
 	}
 	
 	private void postUser(UserDto user) {
-		restTemplate.exchange("http://localhost:"+port+"/users", HttpMethod.POST, new HttpEntity<UserDto>(user), String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:"+port+"/users", HttpMethod.POST, new HttpEntity<UserDto>(user), String.class);
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 	
 	private UserDto getUser(String userName) {

@@ -11,6 +11,9 @@ import com.shinycatcher.api.dao.UserDao;
 import com.shinycatcher.api.dto.UserDto;
 import com.shinycatcher.api.entity.User;
 import com.shinycatcher.api.exception.ResourceNotFoundException;
+import com.shinycatcher.api.util.Base64Encoder;
+import com.shinycatcher.api.util.PasswordEncoder;
+import com.shinycatcher.api.util.PasswordEncoder.EncodingResult;
 
 @Service
 public class UserService {
@@ -36,7 +39,13 @@ public class UserService {
 	}
 	
 	public void postUser(UserDto userDto) {
-		userDao.insert(new User(userDto));
+		User user = new User(userDto);
+//		EncodingResult result = PasswordEncoder.encode(userDto.userPassword);
+//		String base64Password = Base64Encoder.encode(result.password);
+//		String base64Salt = Base64Encoder.encode(result.salt);
+//		user.userPassword = base64Password;
+//		user.salt = base64Salt;
+		userDao.insert(user);
 	}
 	
 	public void putUser(UserDto userDto) {
@@ -48,5 +57,9 @@ public class UserService {
 		user.userId = id;
 		userDao.delete(user);
 	}
-
+	
+	public void putUserPassword(char[] newPassword, String userName) {
+		userDao.updatePassword(newPassword, userName);
+	}
+	
 }

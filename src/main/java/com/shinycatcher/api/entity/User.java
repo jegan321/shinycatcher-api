@@ -11,6 +11,8 @@ public class User {
 	public String userName;
 	public String userEmail;
 	public String userStatus;
+	public String userPassword;
+	public String salt;
 	public List<Entry> entries = new ArrayList<>();
 	
 	public User() {}

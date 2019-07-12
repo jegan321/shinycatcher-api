@@ -39,13 +39,18 @@ public class UserDao {
 	}
 	
 	public void insert(User user) {
-		String sql = "INSERT INTO user (user_name, user_email, user_status) VALUES (?,?,?)";
-		jdbcTemplate.update(sql, user.userName, user.userEmail, user.userStatus);
+		String sql = "INSERT INTO user (user_name, user_email, user_status, user_password, salt) VALUES (?,?,?,?,?)";
+		jdbcTemplate.update(sql, user.userName, user.userEmail, user.userStatus, user.userPassword, user.salt);
 	}
 	
 	public void update(User user) {
 		String sql = "UPDATE user SET user_name=?, user_email=?, user_status=? WHERE user_id=?";
 		jdbcTemplate.update(sql, user.userName, user.userEmail, user.userStatus, user.userId);
+	}
+	
+	public void updatePassword(char[] userPassword, String userName) {
+		String sql = "UPDATE user SET user_password=? WHERE user_name=?";
+		jdbcTemplate.update(sql, userPassword, userName);
 	}
 	
 	public void delete(User user) {

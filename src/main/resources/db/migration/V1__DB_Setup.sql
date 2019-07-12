@@ -3,6 +3,10 @@ CREATE TABLE user (
     user_name VARCHAR NOT NULL,
     user_email VARCHAR NOT NULL,
     user_status VARCHAR NOT NULL,
+    user_password VARCHAR,
+    salt VARCHAR,
+    session_token VARCHAR,
+    session_token_expiration INT,
     PRIMARY KEY(user_id),
 );
 

@@ -9,6 +9,7 @@ public class UserDto {
 	public String userName;
 	public String userEmail;
 	public String userStatus;
+	public String userPassword;
 	public List<EntryDto> entries = new ArrayList<>();
 	
 	public UserDto() {}
