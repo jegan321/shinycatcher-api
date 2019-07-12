@@ -1,7 +1,5 @@
 package com.shinycatcher.api.service;
 
-import java.util.Date;
-
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
