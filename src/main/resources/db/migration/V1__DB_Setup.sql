@@ -10,9 +10,9 @@ CREATE TABLE user (
     PRIMARY KEY(user_id),
 );
 
-INSERT INTO user(user_name, user_email, user_status) VALUES ('baphemetis', 'john@gmail.com', 'Basic');
-INSERT INTO user(user_name, user_email, user_status) VALUES ('larnth', 'caleb.hobson@gmail.com', 'Basic');
-INSERT INTO user(user_name, user_email, user_status) VALUES ('brobson', 'tyler123@gmail.com', 'Basic');
+INSERT INTO user(user_name, user_email, user_status, user_password, salt) VALUES ('baphemetis', 'john@gmail.com', 'Basic', 'ZTx3wUH/EAwZUHmnC1/ruW6LaaoPlR3aoVDvGTVsqAU=', 'D9g38dFXuUIi3hYu8Zb9ynbuEgODvclNUPqu8VHiGpI');
+INSERT INTO user(user_name, user_email, user_status, user_password, salt) VALUES ('larnth', 'caleb.hobson@gmail.com', 'Basic', 'ZTx3wUH/EAwZUHmnC1/ruW6LaaoPlR3aoVDvGTVsqAU=', 'D9g38dFXuUIi3hYu8Zb9ynbuEgODvclNUPqu8VHiGpI');
+INSERT INTO user(user_name, user_email, user_status, user_password, salt) VALUES ('brobson', 'tyler123@gmail.com', 'Basic', 'ZTx3wUH/EAwZUHmnC1/ruW6LaaoPlR3aoVDvGTVsqAU=', 'D9g38dFXuUIi3hYu8Zb9ynbuEgODvclNUPqu8VHiGpI');
 
 CREATE TABLE ball (
     ball_id INT NOT NULL AUTO_INCREMENT,
