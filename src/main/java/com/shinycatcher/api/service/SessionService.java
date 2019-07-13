@@ -3,7 +3,6 @@ package com.shinycatcher.api.service;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.shinycatcher.api.dao.UserDao;
@@ -11,7 +10,6 @@ import com.shinycatcher.api.dto.SessionDto;
 import com.shinycatcher.api.dto.UserCredentialsDto;
 import com.shinycatcher.api.entity.User;
 import com.shinycatcher.api.exception.ResourceForbiddenException;
-import com.shinycatcher.api.exception.ResourceNotFoundException;
 import com.shinycatcher.api.exception.ResourceUnauthorizedException;
 import com.shinycatcher.api.util.Base64Encoder;
 import com.shinycatcher.api.util.PasswordEncoder;
