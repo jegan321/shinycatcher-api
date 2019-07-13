@@ -26,10 +26,9 @@ public class SessionService {
 	public SessionDto createSession(UserCredentialsDto userCredentials) {
 		User storedUser = userService.findUserByName(userCredentials.userName);
 		if (credentialsAreValid(userCredentials, storedUser)) {
-			String token = TokenGenerator.generateRandomToken();
-			userDao.updateSessionToken(token, System.currentTimeMillis(), userCredentials.userName);
-			Long issuedTime = new DateTime().getMillis();
-			return new SessionDto(token, issuedTime);
+			SessionDto session = createNewSesssion();
+			userDao.updateSessionToken(session.sessionToken, session.sessionTokenIssuedTime, userCredentials.userName);
+			return session;
 		} else {
 			throw new ResourceForbiddenException("Invalid user credentials");
 		}
@@ -41,6 +40,12 @@ public class SessionService {
 		byte[] storedPassword = Base64Encoder.decodeAsBytes(storedPasswordBase64);
 		byte[] storedSalt = Base64Encoder.decodeAsBytes(storedSaltBase64);
 		return PasswordEncoder.compare(userCredentials.userPassword, storedSalt, storedPassword);
+	}
+	
+	private SessionDto createNewSesssion() {
+		String token = TokenGenerator.generateRandomToken();
+		Long issuedTime = System.currentTimeMillis();
+		return new SessionDto(token, issuedTime);
 	}
 	
 	public void validateSessionToken(String authorizationHeader, String storedToken, Long storedIssuedTime) {
