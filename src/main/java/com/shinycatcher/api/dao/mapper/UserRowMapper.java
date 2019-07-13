@@ -18,6 +18,8 @@ public class UserRowMapper implements RowMapper<User> {
 		user.userStatus = rs.getString("user_status");
 		user.userPassword = rs.getString("user_password");
 		user.salt = rs.getString("salt");
+		user.sessionToken = rs.getString("session_token");
+		user.sessionTokenIssuedTime = rs.getLong("session_token_issued_time");
 		return user;
 	}
 

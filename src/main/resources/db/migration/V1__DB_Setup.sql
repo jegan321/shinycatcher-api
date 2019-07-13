@@ -6,7 +6,7 @@ CREATE TABLE user (
     user_password VARCHAR,
     salt VARCHAR,
     session_token VARCHAR,
-    session_token_expiration INT,
+    session_token_issued_time BIGINT,
     PRIMARY KEY(user_id),
 );
 

@@ -17,7 +17,7 @@ public class SessionController {
 	SessionService sessionService;
 	
 	@RequestMapping(value="/session", method=RequestMethod.POST)
-	public SessionDto getUsers(@RequestBody UserCredentialsDto userCredentials) {
+	public SessionDto postSession(@RequestBody UserCredentialsDto userCredentials) {
 		return sessionService.createSession(userCredentials);
 	}
 

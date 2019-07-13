@@ -53,9 +53,9 @@ public class UserDao {
 		jdbcTemplate.update(sql, userPassword, userName);
 	}
 	
-	public void updateSessionToken(String sessionToken, String userName) {
-		String sql = "UPDATE user SET session_token=? WHERE user_name=?";
-		jdbcTemplate.update(sql, sessionToken, userName);
+	public void updateSessionToken(String sessionToken, Long sessionTokenIssuedTime, String userName) {
+		String sql = "UPDATE user SET session_token=?, session_token_issued_time=? WHERE user_name=?";
+		jdbcTemplate.update(sql, sessionToken, sessionTokenIssuedTime, userName);
 	}
 	
 	public void delete(User user) {

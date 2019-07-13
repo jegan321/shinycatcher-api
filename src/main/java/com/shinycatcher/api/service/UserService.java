@@ -31,8 +31,12 @@ public class UserService {
 	}
 	
 	public UserDto getUser(String userName) {
+		return findUserByName(userName).toDto();
+	}
+	
+	public User findUserByName(String userName) {
 		try {
-			return userDao.findByUserName(userName).toDto();
+			return userDao.findByUserName(userName);
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException();
 		}

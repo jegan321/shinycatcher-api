@@ -13,6 +13,8 @@ public class User {
 	public String userStatus;
 	public String userPassword;
 	public String salt;
+	public String sessionToken;
+	public Long sessionTokenIssuedTime;
 	public List<Entry> entries = new ArrayList<>();
 	
 	public User() {}
