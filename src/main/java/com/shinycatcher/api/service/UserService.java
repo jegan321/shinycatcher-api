@@ -46,9 +46,7 @@ public class UserService {
 		User user = new User(userDto);
 		EncodingResult result = PasswordEncoder.encode(userDto.userPassword);
 		String base64Password = Base64Encoder.encode(result.password);
-		System.out.println("pass: " + base64Password);
 		String base64Salt = Base64Encoder.encode(result.salt);
-		System.out.println("salt: " + base64Salt);
 		user.userPassword = base64Password;
 		user.salt = base64Salt;
 		userDao.insert(user);

@@ -14,6 +14,19 @@ INSERT INTO user(user_name, user_email, user_status, user_password, salt) VALUES
 INSERT INTO user(user_name, user_email, user_status, user_password, salt) VALUES ('larnth', 'caleb.hobson@gmail.com', 'Basic', 'ZTx3wUH/EAwZUHmnC1/ruW6LaaoPlR3aoVDvGTVsqAU=', 'D9g38dFXuUIi3hYu8Zb9ynbuEgODvclNUPqu8VHiGpI');
 INSERT INTO user(user_name, user_email, user_status, user_password, salt) VALUES ('brobson', 'tyler123@gmail.com', 'Basic', 'ZTx3wUH/EAwZUHmnC1/ruW6LaaoPlR3aoVDvGTVsqAU=', 'D9g38dFXuUIi3hYu8Zb9ynbuEgODvclNUPqu8VHiGpI');
 
+CREATE TABLE owner_editor (
+    owner_editor_id INT NOT NULL AUTO_INCREMENT,
+    owner_id INT NOT NULL,
+    editor_id INT NOT NULL,
+    PRIMARY KEY(owner_editor_id),
+    FOREIGN KEY (owner_id) REFERENCES user(user_id),
+    FOREIGN KEY (editor_id) REFERENCES user(user_id)
+);
+
+INSERT INTO owner_editor(owner_id, editor_id) VALUES (1, 2);
+INSERT INTO owner_editor(owner_id, editor_id) VALUES (1, 3);
+INSERT INTO owner_editor(owner_id, editor_id) VALUES (2, 1);
+
 CREATE TABLE ball (
     ball_id INT NOT NULL AUTO_INCREMENT,
     ball_name VARCHAR NOT NULL,

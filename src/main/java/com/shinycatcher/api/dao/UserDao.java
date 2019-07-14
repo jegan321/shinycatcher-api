@@ -66,9 +66,20 @@ public class UserDao {
 	public List<String> findUserNames() {
 		String sql = "SELECT user_name FROM user";
 		return jdbcTemplate.query(sql, new RowMapper<String>() {
-			@Override
 			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return rs.getString("user_name");
+			}
+		});
+	}
+	
+	public List<String> findEditorUserNames(String userName) {
+		String sql = "SELECT editor.user_name AS editor_name FROM user AS owner "
+				+ "INNER JOIN owner_editor ON owner_editor.owner_id=owner.user_id "
+				+ "INNER JOIN user AS editor ON editor.user_id=owner_editor.editor_id "
+				+ "WHERE owner.user_name=?";
+		return jdbcTemplate.query(sql, new String[] {userName}, new RowMapper<String>() {
+			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getString("editor_name");
 			}
 		});
 	}
