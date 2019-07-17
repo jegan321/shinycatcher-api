@@ -112,7 +112,6 @@ INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUE
 
 INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (4, 1, 1, 1);
 INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (4, 2, 2, 1);
-INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (4, 3, 3, 1);
 
 CREATE TABLE encounter (
     encounter_id INT NOT NULL AUTO_INCREMENT,
