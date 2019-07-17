@@ -13,6 +13,7 @@ CREATE TABLE user (
 INSERT INTO user(user_name, user_email, user_status, user_password, salt) VALUES ('baphemetis', 'john@gmail.com', 'Basic', 'ZTx3wUH/EAwZUHmnC1/ruW6LaaoPlR3aoVDvGTVsqAU=', 'D9g38dFXuUIi3hYu8Zb9ynbuEgODvclNUPqu8VHiGpI');
 INSERT INTO user(user_name, user_email, user_status, user_password, salt) VALUES ('larnth', 'caleb.hobson@gmail.com', 'Basic', 'ZTx3wUH/EAwZUHmnC1/ruW6LaaoPlR3aoVDvGTVsqAU=', 'D9g38dFXuUIi3hYu8Zb9ynbuEgODvclNUPqu8VHiGpI');
 INSERT INTO user(user_name, user_email, user_status, user_password, salt) VALUES ('brobson', 'tyler123@gmail.com', 'Basic', 'ZTx3wUH/EAwZUHmnC1/ruW6LaaoPlR3aoVDvGTVsqAU=', 'D9g38dFXuUIi3hYu8Zb9ynbuEgODvclNUPqu8VHiGpI');
+INSERT INTO user(user_name, user_email, user_status, user_password, salt) VALUES ('matt', 'matt@gmail.com', 'Basic', 'ZTx3wUH/EAwZUHmnC1/ruW6LaaoPlR3aoVDvGTVsqAU=', 'D9g38dFXuUIi3hYu8Zb9ynbuEgODvclNUPqu8VHiGpI');
 
 CREATE TABLE owner_editor (
     owner_editor_id INT NOT NULL AUTO_INCREMENT,
@@ -108,6 +109,10 @@ INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUE
 INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (1, 3, 3, 1);
 
 INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (2, 1, 1, 1);
+
+INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (4, 1, 1, 1);
+INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (4, 2, 2, 1);
+INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (4, 3, 3, 1);
 
 CREATE TABLE encounter (
     encounter_id INT NOT NULL AUTO_INCREMENT,
