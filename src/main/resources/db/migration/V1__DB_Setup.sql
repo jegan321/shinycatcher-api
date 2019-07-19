@@ -97,6 +97,7 @@ CREATE TABLE entry (
     pokemon_pokedex_id INT,
     ball_id INT,
     capture_method_id INT,
+    nickname VARCHAR,
     PRIMARY KEY(entry_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id),
     FOREIGN KEY (pokemon_pokedex_id) REFERENCES pokemon_pokedex(pokemon_pokedex_id),

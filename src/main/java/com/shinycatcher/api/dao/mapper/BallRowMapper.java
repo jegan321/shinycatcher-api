@@ -1,10 +1,11 @@
 package com.shinycatcher.api.dao.mapper;
 
-import com.shinycatcher.api.entity.Ball;
-import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import com.shinycatcher.api.entity.Ball;
 
 public class BallRowMapper implements RowMapper<Ball> {
 

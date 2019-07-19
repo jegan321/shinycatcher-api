@@ -66,17 +66,6 @@ public class UsersIntegrationTest {
 		assertUserDoesntExist("jegan2");
 	}
 	
-	//TODO: finish
-	@Test
-	public void testAuthentication() {
-		
-		// Create user
-		postUser(new UserDto(null, "auth_user", "auth_user@gmail.com", "Basic", "password"));
-		
-		postSession("auth_user", "password");
-		
-	}
-	
 	private void postUser(UserDto user) {
 		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:"+port+"/users", 
 				HttpMethod.POST, new HttpEntity<UserDto>(user), String.class);
@@ -102,12 +91,6 @@ public class UsersIntegrationTest {
 		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:"+port+"/users/"+userId, 
 				HttpMethod.DELETE, null, String.class);
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-	}
-	
-	private SessionDto postSession(String userName, String userPassword) {
-		UserCredentialsDto userCredentials = new UserCredentialsDto(userName, userPassword);
-		return restTemplate.exchange("http://localhost:"+port+"/session", 
-				HttpMethod.POST, new HttpEntity<UserCredentialsDto>(userCredentials), SessionDto.class).getBody();
 	}
 
 }

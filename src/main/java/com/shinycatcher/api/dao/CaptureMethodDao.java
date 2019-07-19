@@ -1,12 +1,13 @@
 package com.shinycatcher.api.dao;
 
-import com.shinycatcher.api.dao.mapper.CaptureMethodRowMapper;
-import com.shinycatcher.api.entity.CaptureMethod;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.shinycatcher.api.dao.mapper.CaptureMethodRowMapper;
+import com.shinycatcher.api.entity.CaptureMethod;
 
 @Repository
 public class CaptureMethodDao {

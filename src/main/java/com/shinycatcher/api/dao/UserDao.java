@@ -1,13 +1,10 @@
 package com.shinycatcher.api.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.shinycatcher.api.dao.extractor.UserAggregateExtractor;
@@ -65,11 +62,7 @@ public class UserDao {
 	
 	public List<String> findUserNames() {
 		String sql = "SELECT user_name FROM user";
-		return jdbcTemplate.query(sql, new RowMapper<String>() {
-			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return rs.getString("user_name");
-			}
-		});
+		return jdbcTemplate.query(sql, (rs, rowNum) -> rs.getString("user_name"));
 	}
 	
 	public List<String> findEditorUserNames(String userName) {
@@ -77,11 +70,7 @@ public class UserDao {
 				+ "INNER JOIN owner_editor ON owner_editor.owner_id=owner.user_id "
 				+ "INNER JOIN user AS editor ON editor.user_id=owner_editor.editor_id "
 				+ "WHERE owner.user_name=?";
-		return jdbcTemplate.query(sql, new String[] {userName}, new RowMapper<String>() {
-			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return rs.getString("editor_name");
-			}
-		});
+		return jdbcTemplate.query(sql, new String[] {userName}, (rs, rowNum) -> rs.getString("editor_name"));
 	}
 
 }

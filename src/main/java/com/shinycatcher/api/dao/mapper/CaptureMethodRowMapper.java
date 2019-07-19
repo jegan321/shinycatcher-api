@@ -1,10 +1,11 @@
 package com.shinycatcher.api.dao.mapper;
 
-import com.shinycatcher.api.entity.CaptureMethod;
-import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import com.shinycatcher.api.entity.CaptureMethod;
 
 public class CaptureMethodRowMapper implements RowMapper<CaptureMethod> {
 

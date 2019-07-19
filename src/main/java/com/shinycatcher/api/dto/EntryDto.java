@@ -7,13 +7,18 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class EntryDto {
 	
 	public Long entryId;
-	public Long pokemonPokedexId;
+
+	public Long pokemonId;
 	public String pokemonName;
 	public String pokemonImage;
+
+	public Long pokedexId;
 	public String pokedexName;
+	
 	public Long ballId;
 	public String ballName;
 	public String ballImage;
+	
 	public Long captureMethodId;
 	public String captureMethodName;
 

@@ -3,11 +3,15 @@ package com.shinycatcher.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.shinycatcher.api.dto.EntryDto;
 import com.shinycatcher.api.entity.User;
@@ -31,8 +35,11 @@ public class EntriesController {
 	}
 	
 	@RequestMapping(value="/users/{userName}/entries", method=RequestMethod.POST)
-	public void postEntry(@PathVariable String userName) {
-		//TODO: create entry for the user with given userName
+	public ResponseEntity<Object> postEntry(@PathVariable String userName, @RequestBody EntryDto entry, 
+			UriComponentsBuilder builder) {
+		Long entryId = entryService.postEntry(userName, entry);
+	    UriComponents uriComponents = builder.path("/users/{userName}/entries/{entryId}").buildAndExpand(userName, entryId);
+	    return ResponseEntity.created(uriComponents.toUri()).build();
 	}
 	
 	@RequestMapping(value="/users/{userName}/entries", method=RequestMethod.PUT)

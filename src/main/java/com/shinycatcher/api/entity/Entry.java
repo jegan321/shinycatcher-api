@@ -5,14 +5,11 @@ import com.shinycatcher.api.dto.EntryDto;
 public class Entry {
 
 	public Long entryId;
-//	public Long pokemonPokedexId;
-//	public Long ballId;
-//	public Long captureMethodId;
 	public Pokemon pokemon;
 	public Pokedex pokedex;
 	public CaptureMethod captureMethod;
 	public Ball ball;
-	
+	public String nickname;
 	
 	public EntryDto toDto() {
 		EntryDto dto = new EntryDto();
@@ -32,4 +29,6 @@ public class Entry {
 		}
 		return dto;
 	}
+	
+	
 }

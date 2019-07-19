@@ -2,14 +2,14 @@ package com.shinycatcher.api.service;
 
 import java.util.List;
 
-import com.shinycatcher.api.dao.BallDao;
-import com.shinycatcher.api.dao.CaptureMethodDao;
-import com.shinycatcher.api.dao.PokemonDao;
-import com.shinycatcher.api.dao.mapper.PokedexDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shinycatcher.api.dao.BallDao;
+import com.shinycatcher.api.dao.CaptureMethodDao;
+import com.shinycatcher.api.dao.PokemonDao;
 import com.shinycatcher.api.dao.UserDao;
+import com.shinycatcher.api.dao.mapper.PokedexDao;
 import com.shinycatcher.api.dto.EntryDetailsDto;
 
 @Service
