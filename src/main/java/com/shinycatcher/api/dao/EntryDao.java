@@ -29,6 +29,13 @@ public class EntryDao {
 		return keyHolder.getKey().longValue();
 	}
 	
+	public void update(Long entryId, Long pokemonPokedexId, Long ballId, Long captureMethodId, String nickname) {
+		String sql = "UPDATE entry "
+				+ "SET pokemon_pokedex_id=?, ball_id=?, capture_method_id=?, nickname=? "
+				+ "WHERE entry_id=?";
+		jdbcTemplate.update(sql, pokemonPokedexId, ballId, captureMethodId, nickname, entryId);
+	}
+	
 	public void delete(Long entryId) {
 		String sql = "DELETE FROM entry WHERE entry_id=?";
 		jdbcTemplate.update(sql, entryId);

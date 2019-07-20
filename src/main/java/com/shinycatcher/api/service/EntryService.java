@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.shinycatcher.api.dao.EntryDao;
 import com.shinycatcher.api.dao.PokemonPokedexDao;
-import com.shinycatcher.api.dao.UserDao;
 import com.shinycatcher.api.dto.EntryDto;
 import com.shinycatcher.api.entity.User;
 
@@ -23,6 +22,11 @@ public class EntryService {
 		User user = userService.findUserByName(userName);
 		Long pokemonPokedexId = pokemonPokedexDao.findPokemonPokedexId(entryDto.pokemonId, entryDto.pokedexId);
 		return entryDao.insert(user.userId, pokemonPokedexId, entryDto.ballId, entryDto.captureMethodId, entryDto.nickname);
+	}
+	
+	public void putEntry(Long entryId, EntryDto entryDto) {
+		Long pokemonPokedexId = pokemonPokedexDao.findPokemonPokedexId(entryDto.pokemonId, entryDto.pokedexId);
+		entryDao.update(entryId, pokemonPokedexId, entryDto.ballId, entryDto.captureMethodId, entryDto.nickname);
 	}
 	
 	public void deleteEntry(Long entryId) {

@@ -17,8 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.shinycatcher.api.dto.SessionDto;
-import com.shinycatcher.api.dto.UserCredentialsDto;
 import com.shinycatcher.api.dto.UserDto;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)

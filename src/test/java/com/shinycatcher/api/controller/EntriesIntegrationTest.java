@@ -111,9 +111,8 @@ public class EntriesIntegrationTest {
     }
     
     private void putEntry(String url, EntryDto entry) {
-		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:"+port+"/users/test_user/entries/"+entry.entryId, 
-				HttpMethod.PUT, new HttpEntity<EntryDto>(entry), String.class);
-		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<EntryDto>(entry), String.class);
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
     
     private void deleteEntry(String url) {
@@ -124,11 +123,6 @@ public class EntriesIntegrationTest {
     private List<EntryDto> getEntries() {
 		UserDto user = restTemplate.getForObject("http://localhost:"+port+"/users/test_user", UserDto.class);
 		return user.entries;
-    }
-    
-    private String getEndOfUrl(String url) {
-    	String[] split = url.split("/");
-    	return split[split.length-1];
     }
 
 }
