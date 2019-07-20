@@ -109,7 +109,7 @@ INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUE
 INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (1, 2, 2, 1);
 INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (1, 3, 3, 1);
 
-INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (2, 1, 1, 1);
+INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id, nickname) VALUES (2, 1, 1, 1, 'yee');
 
 INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (4, 1, 1, 1);
 INSERT INTO entry(user_id, pokemon_pokedex_id, ball_id, capture_method_id) VALUES (4, 2, 2, 1);

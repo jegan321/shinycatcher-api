@@ -14,6 +14,7 @@ public class Entry {
 	public EntryDto toDto() {
 		EntryDto dto = new EntryDto();
 		dto.entryId = entryId;
+		dto.nickname = nickname;
 		if (captureMethod != null) {
 			dto.captureMethodName= captureMethod.captureMethodName;
 		}

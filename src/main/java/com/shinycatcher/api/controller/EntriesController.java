@@ -42,17 +42,14 @@ public class EntriesController {
 	    return ResponseEntity.created(uriComponents.toUri()).build();
 	}
 	
-	@RequestMapping(value="/users/{userName}/entries", method=RequestMethod.PUT)
+	@RequestMapping(value="/users/{userName}/entries/{entryId}", method=RequestMethod.PUT)
 	public void putEntry(@PathVariable String userName) {
-		//TODO: update entry for the user with given userName
+		//TODO: implement
 	}
 	
-	@RequestMapping(value="/users/{userName}/entries", method=RequestMethod.DELETE)
-	public void deleteEntry(@RequestHeader("Authorization") String authorization, @PathVariable String userName) {
-		//TODO: delete entry for the user with given userName
-		
-		User user = userService.findUserByName(userName);
-		sessionService.validateSessionToken(authorization, user.sessionToken, user.sessionTokenIssuedTime);
+	@RequestMapping(value="/users/{userName}/entries/{entryId}", method=RequestMethod.DELETE)
+	public void deleteEntry(@PathVariable Long entryId) {
+		entryService.deleteEntry(entryId);
 	}
 
 }

@@ -21,5 +21,7 @@ public class EntryDto {
 	
 	public Long captureMethodId;
 	public String captureMethodName;
+	
+	public String nickname;
 
 }

@@ -13,16 +13,20 @@ import com.shinycatcher.api.entity.User;
 public class EntryService {
 	
 	@Autowired
-	UserDao userDao;
+	UserService userService;
 	@Autowired
 	EntryDao entryDao;
 	@Autowired
 	PokemonPokedexDao pokemonPokedexDao;
 	
 	public Long postEntry(String userName, EntryDto entryDto) {
-		User user = userDao.findByUserName(userName);
+		User user = userService.findUserByName(userName);
 		Long pokemonPokedexId = pokemonPokedexDao.findPokemonPokedexId(entryDto.pokemonId, entryDto.pokedexId);
-		return entryDao.insert(user.userId, pokemonPokedexId, entryDto.ballId, entryDto.captureMethodId);
+		return entryDao.insert(user.userId, pokemonPokedexId, entryDto.ballId, entryDto.captureMethodId, entryDto.nickname);
+	}
+	
+	public void deleteEntry(Long entryId) {
+		entryDao.delete(entryId);
 	}
 
 }

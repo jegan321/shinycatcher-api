@@ -17,6 +17,7 @@ public class EntryRowMapper implements RowMapper<Entry> {
 	public Entry mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Entry entry = new Entry();
 		entry.entryId = rs.getLong("entry_id");
+		entry.nickname = rs.getString("nickname");
 		if (rs.getObject("capture_method_id") != null) {
 			CaptureMethod captureMethod = new CaptureMethod();
 			captureMethod.captureMethodId = rs.getLong("capture_method_id");
