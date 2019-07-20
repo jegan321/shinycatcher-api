@@ -27,13 +27,11 @@ public class SuggestionsService {
 	PokedexDao pokedexDao;
 
 	public EntryDetailsDto getEntryDetails() {
-		//TODO: change to use dao classes to get the data from the database
 		EntryDetailsDto entryDetailsDto = new EntryDetailsDto();
 		entryDetailsDto.balls = ballDao.findAll();
 		entryDetailsDto.captureMethods = captureMethodDao.findAll();
 		entryDetailsDto.pokemon = pokemonDao.findAll();
 		entryDetailsDto.pokedexes = pokedexDao.findAll();
-
 		return entryDetailsDto;
 	}
 	
